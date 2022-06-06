@@ -1,3 +1,3 @@
 mod partition_refinement;
 
-pub use partition_refinement::PartitionRefinement;
+pub use crate::partition_refinement::PartitionRefinement;

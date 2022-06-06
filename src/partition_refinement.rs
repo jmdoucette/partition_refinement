@@ -56,3 +56,35 @@ impl PartitionRefinement {
         
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn test_refine() {
+        let mut pr = PartitionRefinement::new(vec![0,1,2,3,4,5,6,7]);
+        pr.refine(vec![0,1,2]);
+        assert!(pr.same_set(0,2));
+        assert!(pr.same_set(3,7));
+        assert!(!pr.same_set(0,5));
+        assert!(!pr.same_set(2,4));
+
+        pr.refine(vec![0,5,6,7]);
+        assert!(pr.same_set(1,2));
+        assert!(pr.same_set(5,7));
+        assert!(!pr.same_set(0,2));
+        assert!(!pr.same_set(3,7));
+        assert!(!pr.same_set(0,5));
+        assert!(!pr.same_set(2,4));
+
+        pr.refine(vec![1,2]);
+
+        assert!(pr.same_set(1,2));
+        assert!(pr.same_set(5,6));
+        assert!(!pr.same_set(1,3));
+        assert!(!pr.same_set(1,4));
+        assert!(!pr.same_set(1,5));
+        assert!(!pr.same_set(1,6));
+        assert!(!pr.same_set(7,2));
+    }
+}
