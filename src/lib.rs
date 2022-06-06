@@ -45,6 +45,13 @@ impl PartitionRefinement {
                 self.sets[new_index].0.insert(split_element);
                 self.val_to_set_index.insert(split_element, new_index);
             }
+        } 
+    }
+
+    pub fn same_set(&self, element_1: u32, element_2: u32) -> bool {
+        match (self.val_to_set_index.get(&element_1), self.val_to_set_index.get(&element_2)) {
+            (Some(index_1), Some(index_2)) => index_1 == index_2,
+            _ => panic!("missing elements")
         }
         
     }
